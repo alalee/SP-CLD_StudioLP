@@ -1,0 +1,98 @@
+/* CTA Section with Scroll-Triggered Gradient */
+.cta-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 60px;
+    background-color: #F9F5E9;
+    overflow: hidden;
+}
+
+.cta-gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, #1a4b9c 0%, #5a8fd4 50%, #d4e4f7 100%);
+    opacity: 0;
+    transition: opacity 0.1s ease-out;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.cta-container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 800px;
+}
+
+.cta-title {
+    font-family: 'Skandia', sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #000000;
+    margin-bottom: 24px;
+    transition: color 0.3s ease;
+}
+
+.cta-section[data-gradient-active="true"] .cta-title {
+    color: #ffffff;
+}
+
+.cta-subtitle {
+    font-family: 'Skandia', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 40px;
+    transition: color 0.3s ease;
+}
+
+.cta-section[data-gradient-active="true"] .cta-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.cta-button {
+    font-family: 'Skandia', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 20px 48px;
+    border-radius: 50px;
+    border: none;
+    background-color: #C7FF57;
+    color: #000000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(199, 255, 87, 0.3);
+}
+
+.cta-button:hover {
+    background-color: #B8F048;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(199, 255, 87, 0.5);
+}
+
+.cta-button:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .cta-title {
+        font-size: 40px;
+    }
+
+    .cta-subtitle {
+        font-size: 18px;
+    }
+
+    .cta-button {
+        font-size: 16px;
+        padding: 16px 36px;
+    }
+}

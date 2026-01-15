@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migration Timeline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .timeline-container {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline-line-container {
+            position: absolute;
+            top: 32px;
+            left: 32px;
+            right: 32px;
+            height: 4px;
+            pointer-events: none;
+        }
+        
+        .timeline-line-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #e5e7eb;
+            border-radius: 2px;
+        }
+        
+        .timeline-line-progress {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(to right, #ec4899, #f97316, #eab308);
+            border-radius: 2px;
+            transition: width 0.3s ease-out;
+        }
+        
+        .step {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-[#f5f3ed]">
+    <!-- Scroll indicator -->
+    <div class="h-screen flex items-center justify-center">
+        <p class="text-gray-400 text-lg">↓ Scroll down to see the timeline animate ↓</p>
+    </div>
+
+    <!-- Timeline Section -->
+    <div id="timeline-section" class="min-h-screen flex items-center justify-center py-20 px-8">
+        <div class="w-full max-w-6xl">
+            <!-- Header -->
+            <div class="text-center mb-24">
+                <p class="text-purple-500 text-sm font-semibold tracking-widest mb-3">3-4 WEEKS</p>
+                <h2 class="text-6xl font-bold mb-6">Migration is easy</h2>
+                <p class="text-gray-600 text-xl max-w-2xl mx-auto">
+                    All member credit card data migrates seamlessly. Zero disruption to your business.
+                </p>
+            </div>
+
+            <!-- Timeline -->
+            <div class="timeline-container">
+                <!-- Progress line -->
+                <div class="timeline-line-container">
+                    <div class="timeline-line-bg"></div>
+                    <div id="progress-line" class="timeline-line-progress" style="width: 0%"></div>
+                </div>
+
+                <!-- Step 1 -->
+                <div class="step">
+                    <div id="circle-1" class="w-16 h-16 rounded-full flex items-center justify-center font-bold text-2xl mb-8 transition-all duration-500 bg-gray-300 text-gray-500 mx-auto">
+                        1
+                    </div>
+                    <div id="content-1" class="transition-all duration-700 opacity-30 translate-y-4">
+                        <h3 class="font-bold text-2xl mb-4 text-center">Contract Signed</h3>
+                        <p class="text-gray-600 leading-relaxed text-center">
+                            We'll kick things off with an implementation launch call and complete Stripe setup to prepare your account for payments.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step">
+                    <div id="circle-2" class="w-16 h-16 rounded-full flex items-center justify-center font-bold text-2xl mb-8 transition-all duration-500 bg-gray-300 text-gray-500 mx-auto">
+                        2
+                    </div>
+                    <div id="content-2" class="transition-all duration-700 opacity-30 translate-y-4">
+                        <h3 class="font-bold text-2xl mb-4 text-center">Member Payments Data Migration</h3>
+                        <p class="text-gray-600 leading-relaxed text-center">
+                            We'll configure your account and provide training to ensure your team is set up for success.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step">
+                    <div id="circle-3" class="w-16 h-16 rounded-full flex items-center justify-center font-bold text-2xl mb-8 transition-all duration-500 bg-gray-300 text-gray-500 mx-auto">
+                        3
+                    </div>
+                    <div id="content-3" class="transition-all duration-700 opacity-30 translate-y-4">
+                        <h3 class="font-bold text-2xl mb-4 text-center">Platform Launch & Member Communication</h3>
+                        <p class="text-gray-600 leading-relaxed text-center">
+                            You'll receive ongoing support and a strategic partnership as you launch and continue to grow on the platform.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom spacer -->
+    <div class="h-screen"></div>
+
+    <script>
+        function handleScroll() {
+            const timeline = document.getElementById('timeline-section');
+            const progressLine = document.getElementById('progress-line');
+            
+            if (!timeline || !progressLine) return;
+
+            const timelineTop = timeline.offsetTop;
+            const timelineHeight = timeline.offsetHeight;
+            const windowHeight = window.innerHeight;
+            const scrollY = window.scrollY;
+
+            // Calculate scroll progress
+            const startScroll = timelineTop - windowHeight * 0.7;
+            const endScroll = timelineTop + timelineHeight - windowHeight * 0.3;
+            const scrollRange = endScroll - startScroll;
+
+            const progress = Math.max(0, Math.min(1, (scrollY - startScroll) / scrollRange));
+            
+            // Update progress line
+            progressLine.style.width = `${progress * 100}%`;
+
+            // Update steps
+            for (let i = 1; i <= 3; i++) {
+                const stepProgress = (i - 1) / 2; // 0, 0.5, 1
+                const circle = document.getElementById(`circle-${i}`);
+                const content = document.getElementById(`content-${i}`);
+                
+                if (progress >= stepProgress) {
+                    // Active state
+                    circle.className = 'w-16 h-16 rounded-full flex items-center justify-center font-bold text-2xl mb-8 transition-all duration-500 bg-black text-white scale-110 mx-auto';
+                    content.className = 'transition-all duration-700 opacity-100 translate-y-0';
+                } else {
+                    // Inactive state
+                    circle.className = 'w-16 h-16 rounded-full flex items-center justify-center font-bold text-2xl mb-8 transition-all duration-500 bg-gray-300 text-gray-500 scale-100 mx-auto';
+                    content.className = 'transition-all duration-700 opacity-30 translate-y-4';
+                }
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Initial call
+    </script>
+</body>
+</html>

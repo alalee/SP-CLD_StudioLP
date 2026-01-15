@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizontal Scroll Section</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #000;
+        }
+
+        /* Horizontal Scroll Section */
+        .horizontal-scroll-section {
+            padding: 80px 0;
+            background-color: #000000;
+            overflow: hidden;
+        }
+
+        .section-header-centered {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #D4FF00;
+        }
+
+        .arrow-controls {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .arrow-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: transparent;
+            color: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .arrow-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .arrow-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .scroll-container {
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            cursor: grab;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .cards-wrapper {
+            display: inline-flex;
+            gap: 24px;
+            padding: 20px 0;
+            padding-left: max(60px, calc((100vw - 1320px) / 2));
+            padding-right: 60px;
+        }
+
+        .card {
+            flex-shrink: 0;
+            width: 360px;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            transition: transform 0.3s ease;
+        }
+
+        .card-inner {
+            height: 360px;
+            border-radius: 24px;
+            margin-bottom: 20px;
+        }
+
+        .card-yellow-green .card-inner {
+            background: linear-gradient(180deg, #D4FF00 0%, #F5FF9E 100%);
+        }
+
+        .card-blue .card-inner {
+            background: linear-gradient(180deg, #9EF5FF 0%, #00D4FF 100%);
+        }
+
+        .card-pink-orange .card-inner {
+            background: linear-gradient(180deg, #FFB3E5 0%, #FF6B9D 100%);
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 36px;
+            }
+
+            .card {
+                width: 280px;
+            }
+
+            .card-inner {
+                height: 280px;
+            }
+
+            .cards-wrapper {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .section-header-centered {
+                padding: 0 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="horizontal-scroll-section">
+        <div class="section-header-centered">
+            <h2 class="section-title">All the tools to run<br>your day-to-day</h2>
+            <div class="arrow-controls">
+                <button class="arrow-btn arrow-left" aria-label="Scroll left">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button class="arrow-btn arrow-right" aria-label="Scroll right">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="scroll-container">
+            <div class="cards-wrapper">
+                <div class="card card-yellow-green">
+                    <div class="card-inner"></div>
+                    <h3 class="card-title">Revenue and Payments</h3>
+                </div>
+                <div class="card card-blue">
+                    <div class="card-inner"></div>
+                    <h3 class="card-title">Scheduling & Attendance</h3>
+                </div>
+                <div class="card card-pink-orange">
+                    <div class="card-inner"></div>
+                    <h3 class="card-title">Member Management</h3>
+                </div>
+                <div class="card card-yellow-green">
+                    <div class="card-inner"></div>
+                    <h3 class="card-title">Team & Operations</h3>
+                </div>
+                <div class="card card-blue">
+                    <div class="card-inner"></div>
+                    <h3 class="card-title">Insights & Reporting</h3>
+                </div>
+                <div class="card card-pink-orange">
+                    <div class="card-inner"></div>
+                    <h3 class="card-title">Platform & Integrations</h3>
+                </div>
+                <div class="card card-yellow-green">
+                    <div class="card-inner"></div>
+                    <h3 class="card-title">Dedicated Support Team</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const scrollContainer = document.querySelector('.scroll-container');
+        const leftArrow = document.querySelector('.arrow-left');
+        const rightArrow = document.querySelector('.arrow-right');
+        const scrollAmount = 384;
+
+        leftArrow.addEventListener('click', () => {
+            scrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        rightArrow.addEventListener('click', () => {
+            scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+
+        function updateArrowStates() {
+            const scrollLeft = scrollContainer.scrollLeft;
+            const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+            leftArrow.disabled = scrollLeft <= 0;
+            rightArrow.disabled = scrollLeft >= maxScroll - 1;
+        }
+
+        scrollContainer.addEventListener('scroll', updateArrowStates);
+        window.addEventListener('resize', updateArrowStates);
+        updateArrowStates();
+    </script>
+</body>
+</html>
