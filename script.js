@@ -127,45 +127,104 @@ if (statsSection) {
     observer.observe(statsSection);
 }
 
-// Migration section - scroll-driven timeline
-function handleMigrationScroll() {
-    const timeline = document.getElementById('migration-section');
-    const progressLine = document.getElementById('progress-line');
+// Migration section - scroll-triggered animation
+function handleMigrationScrollAnimation() {
+    const scrollContainer = document.getElementById('migration-scroll-container');
+    const progressLine = document.getElementById('migration-progress-line');
+    const scrollIndicator = document.getElementById('migration-scroll-indicator');
+    const steps = [
+        document.getElementById('migration-step-1'),
+        document.getElementById('migration-step-2'),
+        document.getElementById('migration-step-3')
+    ];
 
-    if (!timeline || !progressLine) return;
+    if (!scrollContainer || !progressLine) return;
 
-    const timelineTop = timeline.offsetTop;
-    const timelineHeight = timeline.offsetHeight;
+    const containerTop = scrollContainer.offsetTop;
+    const containerHeight = scrollContainer.offsetHeight;
     const windowHeight = window.innerHeight;
     const scrollY = window.scrollY;
 
-    // Calculate scroll progress
-    const startScroll = timelineTop - windowHeight * 0.7;
-    const endScroll = timelineTop + timelineHeight - windowHeight * 0.3;
-    const scrollRange = endScroll - startScroll;
+    // Calculate scroll progress within the container (0 to 1)
+    const scrollStart = containerTop;
+    const scrollEnd = containerTop + containerHeight - windowHeight;
+    const scrollRange = scrollEnd - scrollStart;
 
-    const progress = Math.max(0, Math.min(1, (scrollY - startScroll) / scrollRange));
+    const scrollPercent = Math.max(0, Math.min(1, (scrollY - scrollStart) / scrollRange));
 
-    // Update progress line
-    progressLine.style.width = `${progress * 100}%`;
+    // Map scroll to line progress (0% to 100% of viewport width)
+    const lineProgress = scrollPercent * 100;
+    progressLine.style.width = `${lineProgress}%`;
 
-    // Update steps based on progress
-    for (let i = 1; i <= 3; i++) {
-        const stepProgress = (i - 1) / 2; // 0, 0.5, 1
-        const circle = document.getElementById(`circle-${i}`);
-        const content = document.getElementById(`content-${i}`);
+    // Activate steps based on scroll progress
+    // Step 1 activates at 5%, Step 2 at 40%, Step 3 at 75%
+    const step1Threshold = 0.05;
+    const step2Threshold = 0.40;
+    const step3Threshold = 0.75;
 
-        if (progress >= stepProgress) {
-            // Active state
-            circle.classList.add('active');
-            content.classList.add('active');
+    // Step 1
+    if (scrollPercent >= step1Threshold && steps[0]) {
+        steps[0].classList.add('active');
+    } else if (steps[0]) {
+        steps[0].classList.remove('active');
+    }
+
+    // Step 2
+    if (scrollPercent >= step2Threshold && steps[1]) {
+        steps[1].classList.add('active');
+    } else if (steps[1]) {
+        steps[1].classList.remove('active');
+    }
+
+    // Step 3
+    if (scrollPercent >= step3Threshold && steps[2]) {
+        steps[2].classList.add('active');
+    } else if (steps[2]) {
+        steps[2].classList.remove('active');
+    }
+
+    // Hide scroll indicator after scrolling starts
+    if (scrollIndicator) {
+        if (scrollPercent > 0.05) {
+            scrollIndicator.classList.add('hidden');
         } else {
-            // Inactive state
-            circle.classList.remove('active');
-            content.classList.remove('active');
+            scrollIndicator.classList.remove('hidden');
         }
     }
 }
 
-window.addEventListener('scroll', handleMigrationScroll);
-window.addEventListener('load', handleMigrationScroll);
+window.addEventListener('scroll', handleMigrationScrollAnimation);
+window.addEventListener('load', handleMigrationScrollAnimation);
+
+// Pricing section - staggered fade-in animation
+const pricingSection = document.querySelector('.pricing-section');
+const pricingTiers = document.querySelectorAll('.pricing-tier');
+const pricingFootnote = document.querySelector('.pricing-footnote');
+
+if (pricingSection && pricingTiers.length > 0) {
+    const pricingObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Stagger the animations for each tier
+                pricingTiers.forEach((tier, index) => {
+                    setTimeout(() => {
+                        tier.classList.add('visible');
+                    }, index * 200); // 200ms delay between each tier
+                });
+
+                // Animate footnote after all tiers
+                if (pricingFootnote) {
+                    setTimeout(() => {
+                        pricingFootnote.classList.add('visible');
+                    }, pricingTiers.length * 200);
+                }
+
+                pricingObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+
+    pricingObserver.observe(pricingSection);
+}

@@ -50,80 +50,6 @@
         </div>
     </section>
 
-    <!-- Build Community Section -->
-    <section class="build-community-section">
-        <div class="container">
-            <h2 class="community-title">Build community that sticks</h2>
-            <p class="community-subtitle">Offer an experience members won't leave</p>
-
-            <div class="community-grid">
-                <!-- Left Column: Social Connection (spans full height) -->
-                <div class="community-card social-card" data-bg="green">
-                    <div class="community-card-image-wrapper">
-                        <img src="images/build_social connection.jpg" alt="Social Connection" class="community-card-image">
-                    </div>
-                    <div class="community-card-content">
-                        <h3 class="community-card-title">Social Connection</h3>
-                        <p class="community-card-desc">Member feeds, profiles, direct messaging, that help members form real relationships — and show up more often.</p>
-                        <button class="community-card-arrow">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Right Column Top: Gamification -->
-                <div class="community-card" data-bg="white">
-                    <div class="community-card-image-wrapper">
-                        <img src="images/build_gamification.jpg" alt="Gamification & Retention" class="community-card-image">
-                    </div>
-                    <div class="community-card-content">
-                        <h3 class="community-card-title">Gamification & Retention</h3>
-                        <p class="community-card-desc">Challenges, streaks, and badges that encourage repeat visits and consist of weekly attendance.</p>
-                        <button class="community-card-arrow">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Right Column Middle: Events & Retreats -->
-                <div class="community-card events-card" data-bg="aqua">
-                    <div class="community-card-image-wrapper">
-                        <img src="images/build_events.jpg" alt="Events & Retreats" class="community-card-image">
-                    </div>
-                    <div class="community-card-content">
-                        <h3 class="community-card-title">Events & Retreats</h3>
-                        <p class="community-card-desc">Run workshops, retreats, and special events alongside your regular class schedule to diversify revenue.</p>
-                        <button class="community-card-arrow">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Bottom Left: Instructor Profiles -->
-                <div class="community-card instructor-card" data-bg="white">
-                    <div class="community-card-image-wrapper">
-                        <img src="images/build_instructor profiles.jpg" alt="Instructor Profiles" class="community-card-image">
-                    </div>
-                    <div class="community-card-content">
-                        <h3 class="community-card-title">Instructor Profiles</h3>
-                        <p class="community-card-desc">Members can follow instructors and get notified when they teach.</p>
-                        <button class="community-card-arrow">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Stacking Cards Section -->
     <section class="stacking-cards-section">
         <div class="container">
@@ -235,51 +161,52 @@
         </div>
     </section>
 
-    <!-- Migration Section -->
-    <section id="migration-section" class="migration-section">
-        <div class="container">
+    <!-- Migration Section - Scroll-triggered Animation -->
+    <div id="migration-scroll-container" class="migration-scroll-container">
+        <section id="migration-section" class="migration-section-fixed">
             <div class="migration-header">
-                <p class="migration-timeline">3-4 WEEKS</p>
+                <p class="migration-eyebrow">3-4 WEEKS</p>
                 <h2 class="migration-title">Migration is easy</h2>
                 <p class="migration-subtitle">All member credit card data migrates seamlessly. Zero disruption to your business.</p>
             </div>
 
-            <div class="timeline-container">
-                <!-- Progress line -->
-                <div class="timeline-line-container">
-                    <div class="timeline-line-bg"></div>
-                    <div id="progress-line" class="timeline-line-progress" style="width: 0%"></div>
+            <div class="migration-timeline-wrapper">
+                <!-- Full-width gradient line -->
+                <div class="migration-line-container">
+                    <div id="migration-progress-line" class="migration-progress-line"></div>
                 </div>
 
-                <!-- Step 1 -->
-                <div class="step">
-                    <div id="circle-1" class="step-circle">1</div>
-                    <div id="content-1" class="step-content">
-                        <h3 class="step-title">Contract Signed</h3>
-                        <p class="step-desc">We'll kick things off with an implementation launch call and complete Stripe setup to prepare your account for payments.</p>
+                <!-- Steps -->
+                <div class="migration-steps-wrapper">
+                    <div class="migration-step" id="migration-step-1">
+                        <div class="migration-step-circle">1</div>
+                        <h3 class="migration-step-title">Contract Signed</h3>
+                        <p class="migration-step-desc">We'll kick things off with an implementation launch call and complete Stripe setup to prepare your account for payments.</p>
                     </div>
-                </div>
 
-                <!-- Step 2 -->
-                <div class="step">
-                    <div id="circle-2" class="step-circle">2</div>
-                    <div id="content-2" class="step-content">
-                        <h3 class="step-title">Member Payments<br>Data Migration</h3>
-                        <p class="step-desc">We'll configure your account and provide training to ensure your team is set up for success.</p>
+                    <div class="migration-step" id="migration-step-2">
+                        <div class="migration-step-circle">2</div>
+                        <h3 class="migration-step-title">Member Payments<br>Data Migration</h3>
+                        <p class="migration-step-desc">We'll configure your account and provide training to ensure your team is set up for success.</p>
                     </div>
-                </div>
 
-                <!-- Step 3 -->
-                <div class="step">
-                    <div id="circle-3" class="step-circle">3</div>
-                    <div id="content-3" class="step-content">
-                        <h3 class="step-title">Platform Launch &<br>Member Communication</h3>
-                        <p class="step-desc">You'll receive ongoing support and a strategic partnership as you launch and continue to grow on the platform.</p>
+                    <div class="migration-step" id="migration-step-3">
+                        <div class="migration-step-circle">3</div>
+                        <h3 class="migration-step-title">Platform Launch &<br>Member Communication</h3>
+                        <p class="migration-step-desc">You'll receive ongoing support and a strategic partnership as you launch and continue to grow on the platform.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+
+            <!-- Scroll indicator -->
+            <div class="migration-scroll-indicator" id="migration-scroll-indicator">
+                <span>Scroll to explore</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M19 12l-7 7-7-7"/>
+                </svg>
+            </div>
+        </section>
+    </div>
 
     <!-- Stats Section -->
     <section class="stats-section">
@@ -309,6 +236,61 @@
                 <div class="stat-item">
                     <div class="stat-number" data-target="4.9">0</div>
                     <div class="stat-label">App Store Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <div class="pricing-layout">
+                <!-- Left Column - Title and CTAs -->
+                <div class="pricing-left">
+                    <h2 class="pricing-title">Transparent pricing<br>that grows with you</h2>
+                    <p class="pricing-subtitle">Start free, upgrade when ready.<br>No credit card required. Cancel anytime.</p>
+                    <div class="pricing-ctas">
+                        <button class="btn-primary">Launch your business</button>
+                        <button class="btn-text">Book a demo</button>
+                    </div>
+                </div>
+
+                <!-- Right Column - Pricing Tiers -->
+                <div class="pricing-right">
+                    <div class="pricing-tier" data-tier="1">
+                        <div class="tier-icon">
+                            <span class="tier-icon-text">0<span class="symbol">$</span></span>
+                        </div>
+                        <div class="tier-content">
+                            <h3 class="tier-title">Monthly fee</h3>
+                            <p class="tier-desc">No experiences this month? No problem. You don't pay a monthly subscription to list on Sweatpals</p>
+                            <p class="tier-comparison">Competitors charge up to $500/month</p>
+                        </div>
+                    </div>
+
+                    <div class="pricing-tier" data-tier="2">
+                        <div class="tier-icon">
+                            <span class="tier-icon-text">3<span class="symbol">%</span></span>
+                        </div>
+                        <div class="tier-content">
+                            <h3 class="tier-title">Platform fee</h3>
+                            <p class="tier-desc">Applies to all transactions on Sweatpals. Starter accounts initial fee is 7%.</p>
+                            <p class="tier-comparison">Competitors charge up to 18%</p>
+                        </div>
+                    </div>
+
+                    <div class="pricing-tier" data-tier="3">
+                        <div class="tier-icon">
+                            <span class="tier-icon-text">20<span class="symbol">%</span></span>
+                        </div>
+                        <div class="tier-content">
+                            <h3 class="tier-title">Commission fee</h3>
+                            <p class="tier-desc">We only charge a discovery commission when a booking comes from Sweatpals discovery surfaces. If you bring the customer, you keep more.</p>
+                            <p class="tier-comparison">Competitors charge up to 60%</p>
+                        </div>
+                    </div>
+
+                    <p class="pricing-footnote">Additional $0.99 + 2.99% payment processing fee imposed by Stripe can be absorbed by host or passed along to attendees.</p>
                 </div>
             </div>
         </div>

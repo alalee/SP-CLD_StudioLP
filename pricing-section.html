@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparent Pricing - Sweatpals</title>
+    <style>
+        @font-face {
+            font-family: 'Skandia';
+            src: url('SkandiaSN-Regular.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Skandia';
+            src: url('SkandiaSN-Bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Skandia', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #000;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 60px;
+            background-color: #000000;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .pricing-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 100px;
+            align-items: center;
+        }
+
+        /* Left Column */
+        .pricing-left {
+            padding-right: 40px;
+        }
+
+        .pricing-title {
+            font-size: 52px;
+            font-weight: 700;
+            line-height: 1.1;
+            color: #ffffff;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .pricing-subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 48px;
+        }
+
+        .pricing-ctas {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 360px;
+        }
+
+        .btn-primary {
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 20px 32px;
+            border-radius: 50px;
+            border: none;
+            background-color: #ffffff;
+            color: #000000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .btn-text {
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 16px 32px;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .btn-text:hover {
+            opacity: 0.7;
+        }
+
+        /* Right Column */
+        .pricing-right {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .pricing-tier {
+            display: flex;
+            gap: 28px;
+            align-items: flex-start;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+
+        .pricing-tier.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .tier-icon {
+            flex-shrink: 0;
+            width: 72px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tier-icon img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Gradient text fallback for icons */
+        .tier-icon-text {
+            font-size: 56px;
+            font-weight: 700;
+            background: linear-gradient(180deg, #7BFFFF 0%, #C7FF57 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .tier-icon-text .symbol {
+            font-size: 28px;
+            vertical-align: super;
+        }
+
+        .tier-content {
+            flex: 1;
+            padding-top: 4px;
+        }
+
+        .tier-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .tier-desc {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+        }
+
+        .tier-comparison {
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        .pricing-footnote {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.45);
+            margin-top: 20px;
+            padding-left: 100px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+            transition-delay: 0.6s;
+        }
+
+        .pricing-footnote.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .pricing-section {
+                padding: 80px 40px;
+            }
+
+            .pricing-layout {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .pricing-left {
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .pricing-ctas {
+                margin: 0 auto;
+            }
+
+            .pricing-title {
+                font-size: 44px;
+            }
+
+            .pricing-footnote {
+                padding-left: 100px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pricing-section {
+                padding: 60px 24px;
+            }
+
+            .pricing-title {
+                font-size: 36px;
+            }
+
+            .pricing-subtitle {
+                font-size: 16px;
+            }
+
+            .pricing-tier {
+                gap: 20px;
+            }
+
+            .tier-icon {
+                width: 56px;
+                height: 56px;
+            }
+
+            .tier-icon-text {
+                font-size: 44px;
+            }
+
+            .tier-icon-text .symbol {
+                font-size: 22px;
+            }
+
+            .tier-title {
+                font-size: 20px;
+            }
+
+            .tier-desc {
+                font-size: 15px;
+            }
+
+            .pricing-footnote {
+                padding-left: 76px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="pricing-section">
+        <div class="container">
+            <div class="pricing-layout">
+                <!-- Left Column - Title and CTAs -->
+                <div class="pricing-left">
+                    <h2 class="pricing-title">Transparent pricing<br>that grows with you</h2>
+                    <p class="pricing-subtitle">Start free, upgrade when ready.<br>No credit card required. Cancel anytime.</p>
+                    <div class="pricing-ctas">
+                        <button class="btn-primary">Launch your business</button>
+                        <button class="btn-text">Book a demo</button>
+                    </div>
+                </div>
+
+                <!-- Right Column - Pricing Tiers -->
+                <div class="pricing-right">
+                    <div class="pricing-tier" data-tier="1">
+                        <div class="tier-icon">
+                            <!-- Use image if available, otherwise gradient text -->
+                            <!-- <img src="images/icon-0-dollar.png" alt="$0"> -->
+                            <span class="tier-icon-text">0<span class="symbol">$</span></span>
+                        </div>
+                        <div class="tier-content">
+                            <h3 class="tier-title">Monthly fee</h3>
+                            <p class="tier-desc">No experiences this month? No problem. You don't pay a monthly subscription to list on Sweatpals</p>
+                            <p class="tier-comparison">Competitors charge up to $500/month</p>
+                        </div>
+                    </div>
+
+                    <div class="pricing-tier" data-tier="2">
+                        <div class="tier-icon">
+                            <!-- <img src="images/icon-3-percent.png" alt="3%"> -->
+                            <span class="tier-icon-text">3<span class="symbol">%</span></span>
+                        </div>
+                        <div class="tier-content">
+                            <h3 class="tier-title">Platform fee</h3>
+                            <p class="tier-desc">Applies to all transactions on Sweatpals. Starter accounts initial fee is 7%.</p>
+                            <p class="tier-comparison">Competitors charge up to 18%</p>
+                        </div>
+                    </div>
+
+                    <div class="pricing-tier" data-tier="3">
+                        <div class="tier-icon">
+                            <!-- <img src="images/icon-20-percent.png" alt="20%"> -->
+                            <span class="tier-icon-text">20<span class="symbol">%</span></span>
+                        </div>
+                        <div class="tier-content">
+                            <h3 class="tier-title">Commission fee</h3>
+                            <p class="tier-desc">We only charge a discovery commission when a booking comes from Sweatpals discovery surfaces. If you bring the customer, you keep more.</p>
+                            <p class="tier-comparison">Competitors charge up to 60%</p>
+                        </div>
+                    </div>
+
+                    <p class="pricing-footnote">Additional $0.99 + 2.99% payment processing fee imposed by Stripe can be absorbed by host or passed along to attendees.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Pricing section - staggered fade-in animation
+        const pricingSection = document.querySelector('.pricing-section');
+        const pricingTiers = document.querySelectorAll('.pricing-tier');
+        const pricingFootnote = document.querySelector('.pricing-footnote');
+
+        if (pricingSection && pricingTiers.length > 0) {
+            const pricingObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Stagger the animations for each tier
+                        pricingTiers.forEach((tier, index) => {
+                            setTimeout(() => {
+                                tier.classList.add('visible');
+                            }, index * 200); // 200ms delay between each tier
+                        });
+
+                        // Animate footnote after all tiers
+                        if (pricingFootnote) {
+                            setTimeout(() => {
+                                pricingFootnote.classList.add('visible');
+                            }, pricingTiers.length * 200);
+                        }
+
+                        pricingObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+
+            pricingObserver.observe(pricingSection);
+        }
+    </script>
+</body>
+</html>
