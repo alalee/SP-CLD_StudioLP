@@ -228,3 +228,32 @@ if (pricingSection && pricingTiers.length > 0) {
 
     pricingObserver.observe(pricingSection);
 }
+
+// Pricing Bottom section - staggered fade-in animation for each tier
+const pricingBottomSection = document.querySelector('.pricing-bottom');
+const pricingBottomTiers = document.querySelectorAll('.pricing-bottom-tier');
+const pricingBottomFootnote = document.querySelector('.pricing-bottom-footnote');
+
+if (pricingBottomSection && pricingBottomTiers.length > 0) {
+    const pricingBottomObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Add visible class to trigger CSS transitions with built-in delays
+                pricingBottomTiers.forEach((tier) => {
+                    tier.classList.add('visible');
+                });
+
+                // Animate footnote after all tiers
+                if (pricingBottomFootnote) {
+                    pricingBottomFootnote.classList.add('visible');
+                }
+
+                pricingBottomObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+
+    pricingBottomObserver.observe(pricingBottomSection);
+}

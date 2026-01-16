@@ -1343,3 +1343,43 @@ body {
         padding-left: 100px;
     }
 }
+
+/* Pricing Bottom Section - Italic Title Variant */
+.pricing-title-italic {
+    font-style: italic;
+}
+
+/* Pricing Bottom Section - Staggered Animation */
+.pricing-bottom-tier {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pricing-bottom-tier.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pricing-bottom-tier[data-tier="1"] {
+    transition-delay: 0s;
+}
+
+.pricing-bottom-tier[data-tier="2"] {
+    transition-delay: 0.3s;
+}
+
+.pricing-bottom-tier[data-tier="3"] {
+    transition-delay: 0.6s;
+}
+
+.pricing-bottom-footnote {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease-out 0.9s, transform 0.7s ease-out 0.9s;
+}
+
+.pricing-bottom-footnote.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
