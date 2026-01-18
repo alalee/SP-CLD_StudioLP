@@ -257,3 +257,49 @@ if (pricingBottomSection && pricingBottomTiers.length > 0) {
 
     pricingBottomObserver.observe(pricingBottomSection);
 }
+
+// Custom Select Dropdowns for Demo Form
+document.querySelectorAll('.demo-form .custom-select').forEach(select => {
+    const trigger = select.querySelector('.custom-select-trigger');
+    const dropdown = select.querySelector('.custom-select-dropdown');
+    const options = select.querySelectorAll('.custom-select-option');
+    const hiddenSelect = select.querySelector('select');
+    const placeholder = trigger.textContent;
+
+    trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Close other dropdowns
+        document.querySelectorAll('.demo-form .custom-select.open').forEach(s => {
+            if (s !== select) s.classList.remove('open');
+        });
+        select.classList.toggle('open');
+    });
+
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            const value = option.dataset.value;
+            const text = option.textContent;
+
+            // Update trigger text
+            trigger.textContent = text;
+            trigger.classList.add('has-value');
+
+            // Update hidden select
+            hiddenSelect.value = value;
+
+            // Update selected state
+            options.forEach(o => o.classList.remove('selected'));
+            option.classList.add('selected');
+
+            // Close dropdown
+            select.classList.remove('open');
+        });
+    });
+});
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', () => {
+    document.querySelectorAll('.demo-form .custom-select.open').forEach(s => {
+        s.classList.remove('open');
+    });
+});
